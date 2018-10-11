@@ -2,20 +2,17 @@ import os
 import paramiko
 import time
 
-ipd = "10.10.70.21"
-un = "admin"
-pwd = "admin"
-
-
 def clear_screen():
 	os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def Start():
 	introduction()
-	f = open ("switch.txt")
-	for line in f:
-		Task(line.strip(),un,pwd)
+	lines = open ("switch.txt")
+	username = raw_input("Enter Username:  ")
+	password = getpass.getpass(prompt="Enter Password: ")
+	for line in lines:
+		Task(line.strip(),username,password)
 
 
 def introduction():
