@@ -97,7 +97,7 @@ def ShowInfo(client):
 # make gap between each command
 def Send(sender, messages):
     for x in range(len(messages)):
-        for n in range(0, 5):
+        for number in range(0, 5):
             sender.send("\n")
         sender.send(messages[x])
         sender.send("\n")
