@@ -12,8 +12,6 @@ def test_GivenShowBrief_RouterCouldCreateInterfaces():
     file = open(os.path.join(os.path.dirname(
         __file__), 'outputBreif.txt'), "r")
     rt.MapInterfacesByBreif(file.read())
-    for interface in rt.Interfaces:
-        print interface.Status
     assert len(rt.Interfaces) == 18
     assert rt.Interfaces[0].Name == 'FastEthernet0/0'
     assert rt.Interfaces[0].IP == 'unassigned'
@@ -26,9 +24,8 @@ def test_GivenShowPower_RouterCouldCreateInterfaces():
     file = open(os.path.join(os.path.dirname(
         __file__), 'outputPower.txt'), "r")
     rt.MapInterfacesByPower(file.read())
-
     assert len(rt.Interfaces) == 72
-    assert rt.Interfaces[0].Name == 'Gi1/0/1'
+    assert rt.Interfaces[0].Name == 'Gi1s/0/1'
     assert rt.Interfaces[0].Admin == cisco.InterfaceAdmin.Static
     assert rt.Interfaces[0].Operation == cisco.InterfaceOperation.On
     assert rt.Interfaces[0].Power == "10.20"
