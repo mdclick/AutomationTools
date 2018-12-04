@@ -1,11 +1,11 @@
 
 class InterfaceStatus:
-    Up = 1
-    Down = 0
-    AdminstrativlyDown = -1
+    Up = "up"
+    Down = "down"
+    AdminstrativlyDown = "admin down"
 
     @classmethod
-    def GetStatus(self, value):
+    def Get(self, value):
         if value.lower() == 'up':
             return self.Up
         if value.lower() == 'down':
@@ -15,16 +15,23 @@ class InterfaceStatus:
 
 
 class InterfaceAdmin:
-    Auto = 0
-    Static = 1
+    Auto = "auto"
+    Static = "static"
+
+    @classmethod
+    def Get(self, value):
+        if value.lower() == 'auto':
+            return self.Auto
+        if value.lower() == 'static':
+            return self.Static
 
 
 class InterfaceProtocol:
-    Down = 0
-    Up = 1
+    Down = "down"
+    Up = "up"
 
     @classmethod
-    def GetProtocol(self, value):
+    def Get(self, value):
         if value.lower() == 'up':
             return self.Up
         if value.lower() == 'down':
@@ -50,8 +57,8 @@ class Interface:
         self.Status = status
 
     @classmethod
-    def FromPower(cls, admin, oper, power):
-        return cls('', admin, oper, power, '', InterfaceStatus.Down, False)
+    def FromPower(cls, name, admin, oper, power):
+        return cls(name, admin, oper, power, '', InterfaceStatus.Down, False)
 
     @classmethod
     def FromProtocol(cls, name, ip, status, protocol):

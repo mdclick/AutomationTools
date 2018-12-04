@@ -1,8 +1,6 @@
 import paramiko
 import time
-from cisco.interface import Interface
-from cisco.interface import InterfaceStatus
-from cisco.interface import InterfaceProtocol
+import cisco
 
 
 class Router:
@@ -11,19 +9,22 @@ class Router:
         self.client = client
         self.Interfaces = []
 
-    # def GetInterfacesByPower(self):
-    #     result = self.Send(["terminal length 0", "show power inline"])
-    #     self.MapInterfacesByPower(result)
+    def GetInterfacesByPower(self):
+        result = self.Send(["terminal length 0", "show power inline"])
+        self.MapInterfacesByPower(result)
 
-    # def MapInterfacesByPower(self, output):
-    #     values = output.splitlines()
-    #     for value in values:
-    #         if value and value.lower().startswith(('gi', 'fa', 'te')):
-    #             self.Interfaces.append(
-    #                 Interface.FromPower(value[0], value[1], value[2]))
+    def MapInterfacesByPower(self, output):
+        values = output.splitlines()
+        for value in values:
+            if value and value.lower().startswith(('gi', 'fa', 'te')):
+                items = filter(None, value.split(' '))
+                admin = cisco.InterfaceAdmin.Get(items[1])
+                oper = items[2] == 'on'
+                self.Interfaces.append(cisco.Interface.FromPower(
+                    items[0], admin, oper, items[3]))
 
     def GetInterfacesByBreif(self):
-        result = self.Send(["terminal length 0", "show power inline"])
+        result = self.Send(["terminal length 0", "show ip int br"])
         self.MapInterfacesByBreif(result)
 
     def MapInterfacesByBreif(self, output):
@@ -31,9 +32,9 @@ class Router:
         for value in values:
             if value and value.lower().startswith(('gi', 'fa', 'te')):
                 items = filter(None, value.split(' '))
-                status = InterfaceStatus.GetStatus(items[4])
-                protocol = InterfaceProtocol.GetProtocol(items[-1])
-                self.Interfaces.append(Interface.FromProtocol(
+                status = cisco.InterfaceStatus.Get(items[4])
+                protocol = cisco.InterfaceProtocol.Get(items[-1])
+                self.Interfaces.append(cisco.Interface.FromProtocol(
                     items[0], items[1], status, protocol))
 
     # Sender

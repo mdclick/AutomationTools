@@ -9,7 +9,8 @@ def test_GetByStatus():
 
 def test_GivenShowBrief_RouterCouldCreateInterfaces():
     rt = cisco.Router(None)
-    file = open(os.path.join(os.path.dirname(__file__), 'output.txt'), "r")
+    file = open(os.path.join(os.path.dirname(
+        __file__), 'outputBreif.txt'), "r")
     rt.MapInterfacesByBreif(file.read())
     for interface in rt.Interfaces:
         print interface.Status
@@ -18,3 +19,16 @@ def test_GivenShowBrief_RouterCouldCreateInterfaces():
     assert rt.Interfaces[0].IP == 'unassigned'
     assert rt.Interfaces[0].Status == cisco.InterfaceStatus.AdminstrativlyDown
     assert rt.Interfaces[0].Protocol == cisco.InterfaceProtocol.Down
+
+
+def test_GivenShowPower_RouterCouldCreateInterfaces():
+    rt = cisco.Router(None)
+    file = open(os.path.join(os.path.dirname(
+        __file__), 'outputPower.txt'), "r")
+    rt.MapInterfacesByPower(file.read())
+
+    assert len(rt.Interfaces) == 72
+    assert rt.Interfaces[0].Name == 'Gi1/0/1'
+    assert rt.Interfaces[0].Admin == cisco.InterfaceAdmin.Static
+    assert rt.Interfaces[0].Operation == True
+    assert rt.Interfaces[0].Power == "10.20"

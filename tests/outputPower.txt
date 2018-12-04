@@ -1,0 +1,91 @@
+﻿KSMC-B07-1F-C2-PMO#ter len 0
+KSMC-B07-1F-C2-PMO#
+KSMC-B07-1F-C2-PMO#show power inline 
+
+Module   Available     Used     Remaining
+          (Watts)     (Watts)    (Watts) 
+------   ---------   --------   ---------
+1          1800.0       34.8      1765.2
+Interface Admin  Oper       Power   Device              Class Max
+                            (Watts)                            
+--------- ------ ---------- ------- ------------------- ----- ----
+Gi1/0/1   static   on        10.20     n/a                 n/a   60.0 
+Gi1/0/2   auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/3   auto   on         30.0    Ieee PD             4     60.0 
+Gi1/0/4   auto   off        30.0    n/a                 n/a   60.0 
+Gi1/0/5   auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/6   auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/7   auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/8   auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/9   auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/10  auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/11  auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/12  auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/13  auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/14  auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/15  auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/16  auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/17  auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/18  auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/19  auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/20  auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/21  auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/22  auto   on         4.0     Ieee PD             1     60.0 
+Gi1/0/23  auto   off        0.0     n/a                 n/a   60.0 
+Gi1/0/24  auto   on         15.4    Ieee PD             4     60.0 
+
+Module   Available     Used     Remaining
+          (Watts)     (Watts)    (Watts) 
+------   ---------   --------   ---------
+2          1800.0      131.2      1668.8
+Interface Admin  Oper       Power   Device              Class Max
+                            (Watts)                            
+--------- ------ ---------- ------- ------------------- ----- ----
+Gi2/0/1   auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/2   auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/3   auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/4   auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/5   auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/6   auto   on         3.3     IP Phone 7821       1     60.0 
+Gi2/0/7   auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/8   auto   on         3.3     IP Phone 7821       1     60.0 
+Gi2/0/9   auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/10  auto   on         3.3     IP Phone 7821       1     60.0 
+Gi2/0/11  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/12  auto   on         3.3     IP Phone 7821       1     60.0 
+Gi2/0/13  auto   on         3.3     IP Phone 7821       1     60.0 
+Gi2/0/14  auto   on         3.3     IP Phone 7821       1     60.0 
+Gi2/0/15  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/16  auto   on         3.3     IP Phone 7821       1     60.0 
+Gi2/0/17  auto   on         13.4    IP Phone 8865       4     60.0 
+Gi2/0/18  auto   on         3.3     IP Phone 7821       1     60.0 
+Gi2/0/19  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/20  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/21  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/22  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/23  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/24  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/25  static on         30.0    IP Phone 7821       1     30.0 
+Gi2/0/26  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/27  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/28  auto   on         3.3     IP Phone 7821       1     60.0 
+Gi2/0/29  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/30  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/31  auto   on         7.0     Ieee PD             2     60.0 
+Gi2/0/32  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/33  auto   on         3.3     IP Phone 7821       1     60.0 
+Gi2/0/34  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/35  auto   on         13.4    IP Phone 8865       4     60.0 
+Gi2/0/36  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/37  auto   on         3.3     IP Phone 7821       1     60.0 
+Gi2/0/38  auto   on         3.7     IP Phone 7841       1     60.0 
+Gi2/0/39  auto   on         3.3     IP Phone 7821       1     60.0 
+Gi2/0/40  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/41  auto   on         3.7     IP Phone 7841       1     60.0 
+Gi2/0/42  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/43  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/44  auto   on         3.3     IP Phone 7821       1     60.0 
+Gi2/0/45  auto   on         3.3     IP Phone 7821       1     60.0 
+Gi2/0/46  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/47  auto   off        0.0     n/a                 n/a   60.0 
+Gi2/0/48  auto   on         13.4    IP Phone 8865       4     60.0 
