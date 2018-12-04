@@ -1,7 +1,10 @@
+
 import os
 import paramiko
 import getpass
 import time
+from router import Router
+from interface import Interface
 
 
 def Start():
@@ -33,6 +36,14 @@ def introduction():
     print '\t#############################################################'
     print '\n\n\tPlease Press Enter to start\n\n'
     raw_input('\n\n >> ')
+
+
+def CallRouter(ipAddress, username, password):
+    myClient = EstablishConn(ipAddress, username, password)
+    router = Router(myClient)
+    router.getInterfacesByBreif()
+    for port in router.Interfaces:
+        print(por, port.IP)
 
 
 # Job Task
