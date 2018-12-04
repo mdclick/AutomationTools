@@ -19,7 +19,7 @@ class Router:
             if value and value.lower().startswith(('gi', 'fa', 'te')):
                 items = filter(None, value.split(' '))
                 admin = cisco.InterfaceAdmin.Get(items[1])
-                oper = items[2] == 'on'
+                oper = cisco.InterfaceOperation.Get(items[2])
                 self.Interfaces.append(cisco.Interface.FromPower(
                     items[0], admin, oper, items[3]))
 

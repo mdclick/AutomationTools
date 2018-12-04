@@ -30,5 +30,5 @@ def test_GivenShowPower_RouterCouldCreateInterfaces():
     assert len(rt.Interfaces) == 72
     assert rt.Interfaces[0].Name == 'Gi1/0/1'
     assert rt.Interfaces[0].Admin == cisco.InterfaceAdmin.Static
-    assert rt.Interfaces[0].Operation == True
+    assert rt.Interfaces[0].Operation == cisco.InterfaceOperation.On
     assert rt.Interfaces[0].Power == "10.20"

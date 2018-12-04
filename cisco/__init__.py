@@ -4,7 +4,8 @@ from cisco.router import Router
 from cisco.interface import (Interface,
                              InterfaceAdmin,
                              InterfaceProtocol,
-                             InterfaceStatus)
+                             InterfaceStatus,
+                             InterfaceOperation)
 __author__ = "Mohammad Mahmoud <abdalaal.mohamed@gmail.com>"
 __license__ = "MIT License"
 __all__ = [
@@ -12,5 +13,6 @@ __all__ = [
     "Interface",
     "InterfaceAdmin",
     "InterfaceProtocol",
-    "InterfaceStatus"
+    "InterfaceStatus",
+    "InterfaceOperation"
 ]

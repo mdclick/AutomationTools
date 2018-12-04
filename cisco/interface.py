@@ -1,4 +1,16 @@
 
+class InterfaceOperation:
+    On = "on"
+    Off = "off"
+
+    @classmethod
+    def Get(self, value):
+        if value.lower() == 'on':
+            return self.On
+        if value.lower() == 'off':
+            return self.Off
+
+
 class InterfaceStatus:
     Up = "up"
     Down = "down"
@@ -41,11 +53,11 @@ class InterfaceProtocol:
 class Interface:
     Name = ""
     Admin = InterfaceAdmin.Auto
-    Operation = False
+    Operation = InterfaceOperation.Off
     Power = 0.0
     IP = ""
     Status = InterfaceStatus.Down
-    Protocol = False
+    Protocol = InterfaceProtocol.Down
 
     def __init__(self, name, admin, operation, power, ip, status, protocol):
         self.Admin = admin
