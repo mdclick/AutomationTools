@@ -3,8 +3,7 @@ import os
 import paramiko
 import getpass
 import time
-from router import Router
-from interface import Interface
+import cisco
 
 
 def Start():
@@ -13,7 +12,7 @@ def Start():
     un = raw_input("Enter Username: ")
     pwd = getpass.getpass("Enter Password")
     for line in f:
-        Task(line.strip(), un, pwd)
+        CallRouter(line.strip(), un, pwd)
 
 
 def clear_screen():
@@ -40,21 +39,10 @@ def introduction():
 
 def CallRouter(ipAddress, username, password):
     myClient = EstablishConn(ipAddress, username, password)
-    router = Router(myClient)
-    router.getInterfacesByBreif()
+    router = cisco.Router(myClient)
+    router.GetInterfacesByBreif()
     for port in router.Interfaces:
-        print(por, port.IP)
-
-
-# Job Task
-def Task(ipAddress, username, password):
-    myClient = EstablishConn(ipAddress, username, password)
-    hostname = GetHostName(myClient)
-    print ("Getting the following Information from Device " + ipAddress)
-    time.sleep(1)
-    response = ShowInfo(myClient)
-    WriteToFile(hostname+"_"+ipAddress, response)
-    print ("*** Getting Information from Device " + hostname+" is Compelet ***")
+        print(port.Name, port.ip, port.Protocol, port.Status)
 
 
 # Establishing Connection
@@ -73,6 +61,19 @@ def EstablishConn(ip, username, password):
     newConn = ()
     newConn = ssh_client.invoke_shell()
     return newConn
+
+# Job Task
+
+
+'''
+def Task(ipAddress, username, password):
+    myClient = EstablishConn(ipAddress, username, password)
+    hostname = GetHostName(myClient)
+    print ("Getting the following Information from Device " + ipAddress)
+    time.sleep(1)
+    response = ShowInfo(myClient)
+    WriteToFile(hostname+"_"+ipAddress, response)
+    print ("*** Getting Information from Device " + hostname+" is Compelet ***")
 
 
 # Getting Hostname
@@ -120,5 +121,5 @@ def WriteToFile(fileName, message):
     file.write(message)
     file.close()
 
-
+'''
 Start()
