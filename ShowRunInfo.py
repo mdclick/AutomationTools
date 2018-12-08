@@ -1,18 +1,22 @@
 
+import sys
 import os
 import paramiko
 import getpass
 import time
 import cisco
+import socket
 
 
 def Start():
     introduction()
     f = open("hostip.txt")
-    un = raw_input("Enter Username: ")
-    pwd = getpass.getpass("Enter Password")
-    for line in f:
-        CallRouter(line.strip(), un, pwd)
+    un = "admin"
+    pwd = "P@ssw0rd"
+    power = raw_input("Input the power: ")
+    switches = f.readlines()
+    for line in switches:
+        CallRouter(line.strip(), un, pwd, power)
 
 
 def clear_screen():
@@ -37,30 +41,64 @@ def introduction():
     raw_input('\n\n >> ')
 
 
-def CallRouter(ipAddress, username, password):
+def CallRouter(ipAddress, username, password, power):
     myClient = EstablishConn(ipAddress, username, password)
+    if not myClient:
+        return 
     router = cisco.Router(myClient)
-    router.GetInterfacesByBreif()
-    for port in router.Interfaces:
-        print(port.Name, port.ip, port.Protocol, port.Status)
+    router.GetInterfacesByPower()
+    result = filter(lambda port: port.Power == float(power) and port.Admin == cisco.InterfaceAdmin.Auto, router.Interfaces)
+    for item in result:
+        print item.Name
+    '''
+    input = raw_input("Would you like to configure, press[Y/y] ")
+    if(input.lower()== "y"):
+    '''
+    ApplyConf(myClient, result)
 
 
-# Establishing Connection
+
+def ApplyConf(sender, ports):
+    file = open('conf.txt')
+    configurations = file.readlines()
+    for port in ports:
+        print "Configuring ", port.Name, "...."
+        SendCommands(sender,"conf t")
+        SendCommands(sender,"defau "+port.Name)
+        time.sleep(2)
+        SendCommands(sender,"int "+port.Name)
+        for command in configurations:
+            SendCommands(sender, command.strip())
+        time.sleep(3)
+       
+
+    # Establishing Connection
+def SendCommands(sender, message):  
+        # print message
+        sender.send(message)        
+        sender.send("\n")
+
 def EstablishConn(ip, username, password):
+    sys.tracebacklimit = 0
     ssh_client = paramiko.SSHClient()
     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     print ("Connecting to Device: " + ip)
     try:
-        ssh_client.connect(hostname=ip, username=username, password=password)
+        ssh_client.connect(hostname=ip, username=username,
+                           password=password, port=5000)
+        newConn = ()
+        newConn = ssh_client.invoke_shell()
         print "susccfull connection", ip
-    except paramiko.ssh_exception.SSHException:
+        return newConn        
+    except paramiko.SSHException:
         print '\t*** Authentication Failed ***'
+        pass
     except socket.error:
-        print '\t*** %s is Unreachable ***' % host
-
-    newConn = ()
-    newConn = ssh_client.invoke_shell()
-    return newConn
+        print '\t*** %s is Unreachable ***' % ip
+        pass
+    except Exception: 
+        print 'Error found'
+        pass   
 
 # Job Task
 

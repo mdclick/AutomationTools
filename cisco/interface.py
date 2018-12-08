@@ -62,7 +62,7 @@ class Interface:
     def __init__(self, name, admin, operation, power, ip, status, protocol):
         self.Admin = admin
         self.Operation = operation
-        self.Power = power
+        self.Power = float(power)
         self.Name = name
         self.IP = ip
         self.Protocol = protocol
