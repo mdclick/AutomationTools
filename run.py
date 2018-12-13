@@ -1,4 +1,21 @@
+'''
+Menu based Configuration
 
+1- Apply Custome confirgua on Route
+2- Apply Custome confit on ports by condition
+    1- searching by CD{}
+    2- Cisco AP
+    3- Cisco IP Phone
+3- Tpype cutomer valye
+
+2- searching by Power
+shwitchoort 
+type poerr:15.3
+Apply int 
+
+woulr tlike toc y
+3- getting infpormatio from youe
+'''
 import sys
 import os
 import paramiko
@@ -11,8 +28,8 @@ import socket
 def Start():
     introduction()
     f = open("hostip.txt")
-    un = "admin"
-    pwd = "P@ssw0rd"
+    un = raw_input("Enter Username: ")
+    pwd = getpass.getpass("Enter Password")
     power = raw_input("Input the power: ")
     switches = f.readlines()
     for line in switches:
@@ -40,7 +57,6 @@ def introduction():
     print '\n\n\tPlease Press Enter to start\n\n'
     raw_input('\n\n >> ')
 
-
 def CallRouter(ipAddress, username, password, power):
     myClient = EstablishConn(ipAddress, username, password)
     if not myClient:
@@ -62,19 +78,23 @@ def ApplyConf(sender, ports):
     file = open('conf.txt')
     configurations = file.readlines()
     for port in ports:
-        print "Configuring ", port.Name, "...."
+        cisco.helpers.Print("Configuring " +port.Name)
         SendCommands(sender,"conf t")
-        SendCommands(sender,"defau "+port.Name)
-        time.sleep(2)
+        SendCommands(sender,"defau int "+port.Name)
+        cisco.helpers.Loading(1)
         SendCommands(sender,"int "+port.Name)
         for command in configurations:
             SendCommands(sender, command.strip())
-        time.sleep(3)
-       
+            cisco.helpers.Print('.')
+        cisco.helpers.Loading(2)
+        
+    SendCommands(sender,"do wr mem \n")
+    cisco.helpers.Loading(3,"Save Configuration ")
+
 
     # Establishing Connection
-def SendCommands(sender, message):  
-        # print message
+def SendCommands(sender, message):
+        #print message
         sender.send(message)        
         sender.send("\n")
 
@@ -82,7 +102,7 @@ def EstablishConn(ip, username, password):
     sys.tracebacklimit = 0
     ssh_client = paramiko.SSHClient()
     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    print ("Connecting to Device: " + ip)
+    print ("---------- Connecting to Device: " + ip + " ----------")
     try:
         ssh_client.connect(hostname=ip, username=username,
                            password=password, port=5000)
@@ -101,6 +121,8 @@ def EstablishConn(ip, username, password):
         pass   
 
 # Job Task
+mendu-ation 1
+munito s1
 
 
 '''
