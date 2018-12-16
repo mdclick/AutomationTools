@@ -1,0 +1,16 @@
+﻿MLS#
+MLS#
+MLS#
+MLS#
+MLS#
+MLS#show cdp neighbor detail | include (---|Platform|Interface)
+-------------------------
+Platform: MikroTik,  Capabilities: Router 
+Interface: FastEthernet0/24,  Port ID (outgoing port): bridge-local
+-------------------------
+Platform: Cisco IP Phone 7911,  Capabilities: Host Phone 
+Interface: FastEthernet0/10,  Port ID (outgoing port): Port 1
+-------------------------
+Platform: cisco AIR-CAP1602E-E-K9,  Capabilities: Trans-Bridge Source-Route-Bridge IGMP 
+Interface: FastEthernet0/13,  Port ID (outgoing port): GigabitEthernet0
+MLS#

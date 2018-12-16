@@ -37,7 +37,7 @@ class Router:
                 self.Interfaces.append(cisco.Interface.FromProtocol(
                     items[0], items[1], status, protocol))
 
-    # Sender
+    # client
     def Send(self, messages):
         for x in range(len(messages)):
             for n in range(0, 5):

@@ -1,7 +1,6 @@
 import sys
 from cisco._version import __version__, __version_info__
 from cisco.router import Router
-from cisco import helpers
 from cisco.interface import (Interface,
                              InterfaceAdmin,
                              InterfaceProtocol,
@@ -15,6 +14,5 @@ __all__ = [
     "InterfaceAdmin",
     "InterfaceProtocol",
     "InterfaceStatus",
-    "InterfaceOperation",
-    "helpers"
-]
+    "InterfaceOperation"
+    ]

@@ -1,0 +1,10 @@
+show inventory
+show version
+show run
+show ip route
+show ip interface brief
+show ip route
+show cdp neighbor 
+show cdp ne detail
+show vlan brief
+show etherchannel summary
