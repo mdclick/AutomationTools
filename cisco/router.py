@@ -1,6 +1,6 @@
-import paramiko
 import time
 import cisco
+import re
 
 
 class Router:
@@ -23,11 +23,11 @@ class Router:
                 self.Interfaces.append(cisco.Interface.FromPower(
                     items[0], admin, oper, items[3]))
 
-    def GetInterfacesByBreif(self):
+    def GetInterfacesByBrief(self):
         result = self.Send(["terminal length 0", "show ip int br"])
-        self.MapInterfacesByBreif(result)
+        self.MapInterfacesByBrief(result)
 
-    def MapInterfacesByBreif(self, output):
+    def MapInterfacesByBrief(self, output):
         values = output.splitlines()
         for value in values:
             if value and value.lower().startswith(('gi', 'fa', 'te')):
@@ -37,7 +37,29 @@ class Router:
                 self.Interfaces.append(cisco.Interface.FromProtocol(
                     items[0], items[1], status, protocol))
 
-    # client
+    def GetInterfacesByNeighbor(self):
+        result = self.Send('')
+        self.MapInterfacesByNeighbor(result)
+
+    def MapInterfacesByNeighbor(self, output):
+        values = output.splitlines()
+        platform = None
+        interface = None
+        for value in values:
+            if value and value.lower().startswith('platform'):
+                items = filter(None, re.split(",|:", value))
+                platform = items[1].strip()
+            if value and value.lower().startswith('interface'):
+                items = filter(None, re.split(",|:", value))
+                interface = items[1].strip()
+                if platform != None and interface != None:
+                    self.Interfaces.append(
+                        cisco.Interface.FromNeighbor(interface, platform))
+                    platform = None
+                    interface = None
+
+    # Sender
+
     def Send(self, messages):
         for x in range(len(messages)):
             for n in range(0, 5):

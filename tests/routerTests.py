@@ -3,19 +3,15 @@ import pytest
 import cisco
 
 
-def test_GetByStatus():
-    assert('foo'.upper() == 'FOO')
-
-
 def test_GivenShowBrief_RouterCouldCreateInterfaces():
     rt = cisco.Router(None)
     file = open(os.path.join(os.path.dirname(
-        __file__), 'outputBreif.txt'), "r")
-    rt.MapInterfacesByBreif(file.read())
+        __file__), 'outputBrief.txt'), "r")
+    rt.MapInterfacesByBrief(file.read())
     assert len(rt.Interfaces) == 18
     assert rt.Interfaces[0].Name == 'FastEthernet0/0'
-    assert rt.Interfaces[0].IP == 'unassigned'
-    assert rt.Interfaces[0].Status == cisco.InterfaceStatus.AdminstrativlyDown
+    assert rt.Interfaces[0].IP == None
+    assert rt.Interfaces[0].Status == cisco.InterfaceStatus.AdministrativelyDown
     assert rt.Interfaces[0].Protocol == cisco.InterfaceProtocol.Down
 
 
@@ -25,7 +21,19 @@ def test_GivenShowPower_RouterCouldCreateInterfaces():
         __file__), 'outputPower.txt'), "r")
     rt.MapInterfacesByPower(file.read())
     assert len(rt.Interfaces) == 72
-    assert rt.Interfaces[0].Name == 'Gi1s/0/1'
+    assert rt.Interfaces[0].Name == 'Gi1/0/1'
     assert rt.Interfaces[0].Admin == cisco.InterfaceAdmin.Static
     assert rt.Interfaces[0].Operation == cisco.InterfaceOperation.On
-    assert rt.Interfaces[0].Power == "10.20"
+    assert rt.Interfaces[0].Power == 10.2
+
+
+def test_GivenShowNeighbor_RouterCouldCreateInterfaces():
+    rt = cisco.Router(None)
+    file = open(os.path.join(os.path.dirname(
+        __file__), 'outputNeighbor.txt'), "r")
+    rt.MapInterfacesByNeighbor(file.read())
+    assert len(rt.Interfaces) == 3
+    assert rt.Interfaces[0].Name == 'FastEthernet0/24'
+    assert rt.Interfaces[0].Neighbor == 'MikroTik'
+    assert rt.Interfaces[1].Name == 'FastEthernet0/10'
+    assert rt.Interfaces[1].Neighbor == 'Cisco IP Phone 7911'

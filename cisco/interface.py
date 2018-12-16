@@ -14,7 +14,7 @@ class InterfaceOperation:
 class InterfaceStatus:
     Up = "up"
     Down = "down"
-    AdminstrativlyDown = "admin down"
+    AdministrativelyDown = "admin down"
 
     @classmethod
     def Get(self, value):
@@ -23,7 +23,7 @@ class InterfaceStatus:
         if value.lower() == 'down':
             return self.Down
         if value.lower() == 'administratively':
-            return self.AdminstrativlyDown
+            return self.AdministrativelyDown
 
 
 class InterfaceAdmin:
@@ -51,15 +51,16 @@ class InterfaceProtocol:
 
 
 class Interface:
-    Name = ""
+    Name = None
     Admin = InterfaceAdmin.Auto
     Operation = InterfaceOperation.Off
     Power = 0.0
-    IP = ""
+    IP = None
     Status = InterfaceStatus.Down
     Protocol = InterfaceProtocol.Down
+    Neighbor = None
 
-    def __init__(self, name, admin, operation, power, ip, status, protocol):
+    def __init__(self, name, admin, operation, power, ip, status, protocol, neighbor):
         self.Admin = admin
         self.Operation = operation
         self.Power = float(power)
@@ -67,11 +68,16 @@ class Interface:
         self.IP = ip
         self.Protocol = protocol
         self.Status = status
+        self.Neighbor = neighbor
 
     @classmethod
-    def FromPower(cls, name, admin, oper, power):
-        return cls(name, admin, oper, power, '', InterfaceStatus.Down, False)
+    def FromPower(cls, name, admin, operation, power):
+        return cls(name, admin, operation, power, None, InterfaceStatus.Down, InterfaceProtocol.Down, None)
 
     @classmethod
     def FromProtocol(cls, name, ip, status, protocol):
-        return cls(name, '', False, 0.0, ip, status, protocol)
+        return cls(name, None, InterfaceOperation.Off, 0.0, None, status, protocol, None)
+
+    @classmethod
+    def FromNeighbor(cls, name, neighbor):
+        return cls(name, None, InterfaceOperation.Off, 0.0, None, InterfaceStatus.Down, InterfaceProtocol.Down, neighbor)
