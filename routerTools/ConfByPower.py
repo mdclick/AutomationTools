@@ -34,20 +34,12 @@ def CallRouter(ipAddress, username, password, power):
     if len(result) > 0:
         print 'Found **', len(result), '** interfaces'
         ApplyConf(myClient, result)
-<<<<<<< HEAD
-
-=======
     else:
         print "No matched Device !"
->>>>>>> 3894a85... update power and run
     '''
     input = raw_input("Would you like to configure, press[Y/y] ")
     if(input.lower()== "y"):
     '''
-<<<<<<< HEAD
-=======
-        
->>>>>>> 3894a85... update power and run
 
 
 def ApplyConf(client, ports):

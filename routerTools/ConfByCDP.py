@@ -31,13 +31,9 @@ def CallRouter(ipAddress, username, password, neighbor):
             print "Platform: " + item.Neighbor
             print "Interface: " + item.Name
             print "============================="
-<<<<<<< HEAD
-
-=======
     else:
         print "No matched Device !"
                 
->>>>>>> 3894a85... update power and run
         #input = raw_input("Would you like to configure, press[Y/y] ")
         # if(input.lower()== "y"):
         ApplyConf(myClient, result)
