@@ -21,8 +21,9 @@ def MainMenu():
 
     print '\n\n'
 
-    Achoice = int(input("Enter your choice:"))
-    if Achoice == 1:
+    Achoice=int(input("Enter your choice:"))
+    if Achoice==1:
+        print '\n\n'
         routerTools.ApplyConf.StartConf()
     if Achoice == 2:
         routerTools.common.SubIntroduction()

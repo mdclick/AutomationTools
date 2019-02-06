@@ -8,7 +8,6 @@ import common as common
 
 
 def ConfByCDP():
-    introduction()
     f = open("host.txt")
     un = raw_input("Enter Username: ")
     pwd = getpass.getpass("Enter Password")
@@ -16,28 +15,6 @@ def ConfByCDP():
     switches = f.readlines()
     for line in switches:
         CallRouter(line.strip(), un, pwd, neighbor)
-
-
-def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-
-# Introduction
-def introduction():
-    clear_screen()
-    print '\n\n'
-    print '\t#############################################################'
-    print '\t#                                                           #'
-    print '\t#                                                           #'
-    print '\t#            Welcome to Cisco Beta Automated tool           #'
-    print '\t#                                                           #'
-    print '\t#                                                           #'
-    print '\t#                      Developed by Mohammed Abdelaal Ali   #'
-    print '\t#                                                           #'
-    print '\t#                                                           #'
-    print '\t#############################################################'
-    print '\n\n\tPlease Press Enter to start\n\n'
-    raw_input('\n\n >> ')
 
 
 def CallRouter(ipAddress, username, password, neighbor):
@@ -54,7 +31,13 @@ def CallRouter(ipAddress, username, password, neighbor):
             print "Platform: " + item.Neighbor
             print "Interface: " + item.Name
             print "============================="
+<<<<<<< HEAD
 
+=======
+    else:
+        print "No matched Device !"
+                
+>>>>>>> 3894a85... update power and run
         #input = raw_input("Would you like to configure, press[Y/y] ")
         # if(input.lower()== "y"):
         ApplyConf(myClient, result)
