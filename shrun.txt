@@ -6,5 +6,7 @@ show ip interface brief
 show ip route
 show cdp neighbor 
 show cdp ne detail
+show lld neighbor 
+show lld ne de
 show vlan brief
 show etherchannel summary

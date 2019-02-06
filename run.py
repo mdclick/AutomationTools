@@ -1,21 +1,3 @@
-'''
-Menu based Configuration
-
-1- Apply Custome confirgua on Route
-2- Apply Custome confit on ports by condition
-    1- searching by CD{}
-    2- Cisco AP
-    3- Cisco IP Phone
-3- Tpype cutomer valye
-
-2- searching by Power
-shwitchoort 
-type poerr:15.3
-Apply int 
-
-woulr tlike toc y
-3- getting infpormatio from youe
-'''
 import sys
 import os
 import paramiko
@@ -27,24 +9,50 @@ import routerTools
 
 
 def MainMenu():
-    routerTools.common.Introduction()
-    print ("     1. Apply Customize confgirauton on Router")
+    routerTools.common.MainIntroduction()
+    print ("     1. Apply Confgirauton on Device")
     print "\n"
-    print ('2. Apply Configuration on Switch Ports by condition')
+    print ('     2. Apply Configuration on Switch Port by condition')
     print "\n"
-    print ('3. Getting Infromation from Device')
+    print ('     3. Getting Infromation from Device')
+    print "\n"
+    print ('     0. Exit')
+    print "\n"
+
     print '\n\n'
 
-    choice=int(input("Enter your Choice:"))
-    if choice==1:
+    Achoice = int(input("Enter your choice:"))
+    if Achoice == 1:
         routerTools.ApplyConf.StartConf()
-    if choice==2:
-        #CDP()
-        routerTools.ConfByPower.ConfByPower()
-    if  choice==3:
+    if Achoice == 2:
+        routerTools.common.SubIntroduction()
+        print "\n"
+        print "\n"
+        print ('     1. Filter By CDP')
+        print "\n"
+        print ('     2. Filter By Power')
+        print "\n"
+        print ('     3. Back')
+        print '\n\n'
+        Bchoice = int(input("Enter your choice:"))
+        if Bchoice == 1:
+            print '\n\n'
+            routerTools.ConfByCDP.ConfByCDP()
+        if Bchoice == 2:
+            print '\n\n'
+            routerTools.ConfByPower.ConfByPower()
+        if Bchoice == 3:
+            print '\n\n'
+            MainMenu()
+
+    elif Achoice == 3:
+        print '\n\n'
         routerTools.GetInfo.StartGetInfo()
-    #if choice==4:
-    #   exit
+    elif Achoice == 0:
+        sys.exit
+    else:
+        print ('     Invalid choice')
+        MainMenu()
 
 
 MainMenu()

@@ -16,7 +16,7 @@ class Router:
     def MapInterfacesByPower(self, output):
         values = output.splitlines()
         for value in values:
-            if value and value.lower().startswith(('gi', 'fa', 'te')):
+            if value and value.lower().startswith(('gi', 'fa', 'te', 'tw')):
                 items = filter(None, value.split(' '))
                 admin = cisco.InterfaceAdmin.Get(items[1])
                 oper = cisco.InterfaceOperation.Get(items[2])
@@ -30,7 +30,7 @@ class Router:
     def MapInterfacesByBrief(self, output):
         values = output.splitlines()
         for value in values:
-            if value and value.lower().startswith(('gi', 'fa', 'te')):
+            if value and value.lower().startswith(('gi', 'fa', 'te', 'tw')):
                 items = filter(None, value.split(' '))
                 status = cisco.InterfaceStatus.Get(items[4])
                 protocol = cisco.InterfaceProtocol.Get(items[-1])
@@ -38,7 +38,8 @@ class Router:
                     items[0], items[1], status, protocol))
 
     def GetInterfacesByNeighbor(self):
-        result = self.Send('')
+        result = self.Send(
+            ["terminal length 0", "show cdp neighbor detail | include (---|Platform|Interface)"])
         self.MapInterfacesByNeighbor(result)
 
     def MapInterfacesByNeighbor(self, output):

@@ -3,13 +3,13 @@ import getpass
 import time
 import sys
 import cisco
-import common as common 
+import common as common
 
 
 def ConfByPower():
     f = open("host.txt")
     un = raw_input("Enter Username: ")
-    pwd = getpass.getpass("Enter Password")
+    pwd = getpass.getpass("Enter Password: ")
     power = raw_input("Input the power: ")
     switches = f.readlines()
     for line in switches:
@@ -19,32 +19,31 @@ def ConfByPower():
 def CallRouter(ipAddress, username, password, power):
     myClient = common.EstablishConn(ipAddress, username, password)
     if not myClient:
-        return 
+        return
     router = cisco.Router(myClient)
     router.GetInterfacesByPower()
-    result = filter(lambda port: port.Power == float(power) and port.Admin == cisco.InterfaceAdmin.Auto, router.Interfaces)
-    if len(result)>0:
-        print 'Found' , len(result), 'interfaces'
+    result = filter(lambda port: port.Power == float(
+        power) and port.Admin == cisco.InterfaceAdmin.Auto, router.Interfaces)
+    if len(result) > 0:
+        print 'Found **', len(result), '** interfaces'
         ApplyConf(myClient, result)
-    
+
     '''
     input = raw_input("Would you like to configure, press[Y/y] ")
     if(input.lower()== "y"):
     '''
-    
 
 
 def ApplyConf(client, ports):
-    file = open('conf.txt')
+    common.SendCommand(client, "conf t")
+    file = open('switchport.txt')
     configurations = file.readlines()
     for port in ports:
         common.Print("Configuring " + port.Name)
-        common.SendCommands(client,"conf t")
-        common.SendCommands(client,"defau "+port.Name)
+        common.SendCommand(client, "default int "+port.Name)
         common.Loading(1)
-        common.SendCommands(client,"int "+port.Name)
-        for command in configurations:
-            common.SendCommands(client, command.strip())
+        common.SendCommand(client, "int "+port.Name)
+        common.SendCommands(client, configurations)
         common.Loading(2)
         print('')
     common.SaveConfig(client)
