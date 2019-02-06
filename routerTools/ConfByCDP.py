@@ -31,12 +31,13 @@ def CallRouter(ipAddress, username, password, neighbor):
             print "Platform: " + item.Neighbor
             print "Interface: " + item.Name
             print "============================="
+        ApplyConf(myClient, result)
     else:
         print "No matched Device !"
                 
         #input = raw_input("Would you like to configure, press[Y/y] ")
         # if(input.lower()== "y"):
-        ApplyConf(myClient, result)
+    
 
 
 def ApplyConf(client, ports):
